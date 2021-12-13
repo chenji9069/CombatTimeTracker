@@ -669,8 +669,10 @@ end
 
 function CTT_CheckToPlaySound()
     if not bossEncounter then return end
+    local bossId = bossEncounterID
+    if cttMenuOptions.raidKey == 2 then bossId = EcounterIdSOD end
     for k,v in pairs(cttMenuOptions.alerts) do
-        if k ~= "scrollvalue" and k ~= "offset" and bossEncounterID[cttMenuOptions.alerts[k][4]] == bossEncounterName and tonumber(totalSeconds) == cttMenuOptions.alerts[k][1] then
+        if k ~= "scrollvalue" and k ~= "offset" and bossId[cttMenuOptions.alerts[k][4]] == bossEncounterName and tonumber(totalSeconds) == cttMenuOptions.alerts[k][1] then
             lastBossSoundPlayed = totalSeconds
             PlaySoundFile(LSM:Fetch("sound", soundTableOptions[cttMenuOptions.soundDropDownValue]), "Master")
         end
